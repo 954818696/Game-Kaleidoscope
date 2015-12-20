@@ -8,6 +8,7 @@ namespace GameLogic
         public GameModeClassic()
         {
             mPreCountClock = 0;
+            mGameModeType = EGameMode.E_Classic;
         }
 
     }

@@ -3,10 +3,15 @@ using System.Collections;
 
 namespace GameLogic
 {
+    public enum EGameMode
+    {
+        E_Classic = 1,
+    }
+
     public abstract class GameMode
     {
-        // 开始倒计时
-        public int mPreCountClock;
+        protected int mPreCountClock;
+        protected EGameMode mGameModeType;
     }
 
 
