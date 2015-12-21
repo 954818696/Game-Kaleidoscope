@@ -42,26 +42,26 @@ namespace InputCustom
             ESlideDirection vdirection = ESlideDirection.E_None,
                             hdirection = ESlideDirection.E_None;
 
-            if (yDiff - GameConfig.SlideThreshold > 0)
+            if (yDiff - GameConfig.Instance.SlideThreshold > 0)
             {
                 vdirection = ESlideDirection.E_Up;
             }
-            else if(yDiff + GameConfig.SlideThreshold < 0)
+            else if(yDiff + GameConfig.Instance.SlideThreshold < 0)
             {
                 vdirection = ESlideDirection.E_Down;
             }
 
-            if (xDiff - GameConfig.SlideThreshold > 0)
+            if (xDiff - GameConfig.Instance.SlideThreshold > 0)
             {
                 hdirection = ESlideDirection.E_Right;
             }
-            else if(xDiff + GameConfig.SlideThreshold < 0)
+            else if(xDiff + GameConfig.Instance.SlideThreshold < 0)
             {
                 hdirection = ESlideDirection.E_Left;
             }
 
             ESlideDirection finalDirection = ESlideDirection.E_None;
-            if (slope > GameConfig.SlopeThreshold)
+            if (slope > GameConfig.Instance.SlopeThreshold)
             {
                 finalDirection = vdirection;
             }

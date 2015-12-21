@@ -2,16 +2,25 @@
 using System.Collections;
 using InputCustom;
 
-public class GameConfig : Singleton<GameConfig>
+public class GameConfig : MonoSingleton<GameConfig>
 {
-	public const int   BlockWidth  = 50;
-	public const int   BlockHeight = 50;
+	public int Width  = 10;
+	public int Height = 20;
+
+    public float blockWidth;
+    public float blockHeight;
+
+    public Transform mBlockPrefab;
+    public Transform mLeftBottomPos;
+
 
     // 滑动阈值
-    public const float SlideThreshold = 1f;
-    public const float SlopeThreshold = 2f;
+    public float SlideThreshold = 1f;
+    public float SlopeThreshold = 2f;
 
     public EInputDevice InputDevice = EInputDevice.E_Touch;
+
+
 
 
 }
