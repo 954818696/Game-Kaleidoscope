@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Resources\Script\GameConfig.cs" />
+     <Compile Include="Assets\Resources\Script\GameLogic\ChessBoard.cs" />
      <Compile Include="Assets\Resources\Script\GameLogic\GameModeBase.cs" />
      <Compile Include="Assets\Resources\Script\GameLogic\GameModeClassic.cs" />
      <Compile Include="Assets\Resources\Script\GameLogic\State\State.cs" />
@@ -59,6 +60,7 @@
      <Compile Include="Assets\Resources\Script\Miscellaneous\LogDebug.cs" />
      <Compile Include="Assets\Resources\Script\Miscellaneous\MonoSingleton.cs" />
      <Compile Include="Assets\Resources\Script\Miscellaneous\Singleton.cs" />
+     <Compile Include="Assets\Resources\Script\test.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/dev/Unity/Engine/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

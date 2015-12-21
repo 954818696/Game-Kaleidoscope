@@ -26,6 +26,11 @@ namespace GameLogic
             
         public StateMachine()
         {
+
+        }
+
+        public void Awake()
+        {
             mGameMode = new GameModeClassic();
         }
 
