@@ -10,13 +10,12 @@ namespace GameLogic
         public const string Pause = "Pause";
         public const string Generate = "Generate";
         public const string Fall = "Fall";
-        public const string Reduce = "Reduce";
+        public const string Land = "Land";
         
         
     }
     
     // 用于游戏全局状态总控的状态机
-    
     public class StateMachine : MonoSingleton<StateMachine>
     {
         private State mCurrentState = null;

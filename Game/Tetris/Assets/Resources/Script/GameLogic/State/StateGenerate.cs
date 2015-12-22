@@ -15,18 +15,31 @@ namespace GameLogic
             base.Enter();
         }
 
-        enum EBlockType
-        {
-            E_Line = 1,
-            E_Square = 2,
-            E_Z = 3,
-            E_Triangle = 4,
-        }
+
 
         public override void Execute()
         {
             base.Execute();
-            //Random.Range();
+            EBlockType blockType = (EBlockType)Random.Range((int)EBlockType.E_Line, (int)EBlockType.E_Triangle);
+            EBlockRot rotType = (EBlockRot)Random.Range(1, 4);
+
+            switch (blockType)
+            {
+                case EBlockType.E_Line:
+                    ;
+                    break;
+                case EBlockType.E_Square:
+                    ;
+                    break;
+                case EBlockType.E_Triangle:
+                    ;
+                    break;
+                case EBlockType.E_Z:;
+                    break;
+
+            }
+
+
         }
         
         public override void Exit()
