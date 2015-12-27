@@ -15,11 +15,10 @@ namespace GameLogic
     
     public enum EBlockRot
     {
-        E_None = 0,
-        E_Up = 1,
-        E_Right = 2,
-        E_Down = 3,
-        E_Left = 4,
+        E_Up = 0,     // Default
+        E_Right = 1,
+        E_Down= 2,
+        E_Left = 3,
     }
 
     public class BlockPos
@@ -38,26 +37,20 @@ namespace GameLogic
     public abstract class BlockBase
     {
         public EBlockType blockType = EBlockType.E_None;
-        public EBlockRot  blockRot = EBlockRot.E_None;
+        public EBlockRot  blockRot;
 
         protected List<BlockPos> generateList = new List<BlockPos>();
+        protected BlockPos ancholBlock; 
 
         public List<BlockPos> GetPointList()
         {
             return generateList;
         }
 
-        public virtual void RotBlock()
-        {
+        public abstract void RotBlock(EBlockRot rotType);
+        public abstract void RotBlock();
 
-        }
-
-        public virtual void GenerateBlock(int x, int y)
-        {
-
-        }
-
-
+        public abstract void GenerateBlock(int x, int y);
     }
 }
 
