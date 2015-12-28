@@ -9,10 +9,10 @@ namespace GameLogic
         {
             mStateName = StateNameSet.Generate;
         }
-        
-        public override void Enter()
+
+        public override void Enter(GameMode gameMode)
         {
-            base.Enter();
+            base.Enter(gameMode);
         }
 
 

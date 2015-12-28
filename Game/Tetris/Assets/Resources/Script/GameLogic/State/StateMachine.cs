@@ -73,7 +73,7 @@ namespace GameLogic
             mPrevState = mCurrentState;
             mCurrentState.Exit();
             mCurrentState = newState;
-            mCurrentState.Enter();
+            mCurrentState.Enter(mGameMode);
         }
         
         // 回滚到上一个状态
@@ -101,6 +101,9 @@ namespace GameLogic
             {
                 mCurrentState.Execute();
             }
+
+            // Render. unity ，Unreal无需此次调用
+            // 自己实现的Render需在此将游戏逻辑转化为图形输出。
         }
     }
 }

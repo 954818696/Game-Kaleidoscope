@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace GameLogic
 {
@@ -13,6 +14,7 @@ namespace GameLogic
     public class ChessBoard
     {
         private bool[,] slotStateArray;
+        private BlockBase curBlocks;
         
         public ChessBoard()
         {

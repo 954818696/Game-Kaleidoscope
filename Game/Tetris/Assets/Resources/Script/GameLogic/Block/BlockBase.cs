@@ -19,6 +19,7 @@ namespace GameLogic
         E_Right = 1,
         E_Down= 2,
         E_Left = 3,
+        E_Max = 4,
     }
 
     public class BlockPos

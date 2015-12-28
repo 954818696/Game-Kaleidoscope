@@ -7,7 +7,7 @@ namespace GameLogic
     {
         public string mStateName = "null";
         
-        public virtual void Enter()
+        public virtual void Enter(GameMode gameMode)
         {
             LogDebug.Log("Enter State :" + mStateName.ToString());
         }
