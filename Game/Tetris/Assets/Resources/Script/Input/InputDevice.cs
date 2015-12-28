@@ -5,8 +5,9 @@ namespace InputCustom
 {
     public abstract class InputDevice 
     {
-        public float x;
-        public float y;
+        public EInputDevice deviceType = EInputDevice.E_None;
+
+        public abstract void Update();
     }
 
 }

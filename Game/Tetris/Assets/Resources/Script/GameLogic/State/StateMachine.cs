@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InputCustom;
 
 namespace GameLogic
 {
@@ -92,11 +93,13 @@ namespace GameLogic
         {
             
         }
-        
+
+        static Vector3 pos1, pos2;
         // Update is called once per frame
         void Update ()
         {
-            // TouchPhase.
+            InputController.Instance.Update();
+
             if (mCurrentState != null)
             {
                 mCurrentState.Execute();

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 using InputCustom;
 
 public class GameConfig : MonoSingleton<GameConfig>
@@ -18,9 +20,16 @@ public class GameConfig : MonoSingleton<GameConfig>
     public float SlideThreshold = 1f;
     public float SlopeThreshold = 2f;
 
-    public EInputDevice InputDevice = EInputDevice.E_Touch;
+    public bool EnableLog = true;
 
+    // 操作输入, 同时支持多个输入设备
+    public List<EInputDevice> InputDeviceList = new List<EInputDevice>();
 
+    void Start()
+    {
+        LogDebug.EnableLog = EnableLog;
 
+        InputController.Instance.SetInputDevice(InputDeviceList);
+    }
 
 }
