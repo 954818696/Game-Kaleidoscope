@@ -20,26 +20,11 @@ namespace GameLogic
         public override void Execute()
         {
             base.Execute();
-            EBlockType blockType = (EBlockType)Random.Range((int)EBlockType.E_Line, (int)EBlockType.E_Triangle);
-            EBlockRot rotType = (EBlockRot)Random.Range(1, 4);
 
-            switch (blockType)
-            {
-                case EBlockType.E_Line:
-                    ;
-                    break;
-                case EBlockType.E_Square:
-                    ;
-                    break;
-                case EBlockType.E_Triangle:
-                    ;
-                    break;
-                case EBlockType.E_Z:;
-                    break;
+            BlockBase newBlock = BlockFactory.GenerateBlock(4, 19);
+            mGameMode.mChessBoard.SetCurFallBlock(newBlock);
 
-            }
-
-
+            mGameMode.mChessBoard.UpdateBoard();
         }
         
         public override void Exit()

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Rendering;
 
 namespace GameLogic
 {
@@ -13,8 +14,9 @@ namespace GameLogic
 
     public class ChessBoard
     {
-        private bool[,] slotStateArray;
-        private BlockBase curBlocks;
+        public bool[,]         slotStateArray;
+        private BlockBase curBlock;
+        private ChessBoardRender mChessBoardRender;
         
         public ChessBoard()
         {
@@ -31,14 +33,6 @@ namespace GameLogic
             }
         }
         
-        public Vector3 GetSlotPos(int x, int y)
-        {
-            Vector3 pos = new Vector3(GameConfig.Instance.mLeftBottomPos.localPosition.x + x * GameConfig.Instance.blockWidth, 
-                                      GameConfig.Instance.mLeftBottomPos.localPosition.y + y * GameConfig.Instance.blockHeight, 
-                                      0);
-            
-            return pos;
-        }
         
         public EChessBoardSlot GetSlotState(int x, int y)
         {
@@ -56,6 +50,26 @@ namespace GameLogic
             {
                 return EChessBoardSlot.E_Empty;
             }
+        }
+
+        public void SetCurFallBlock(BlockBase newBlock)
+        {
+            curBlock = newBlock;
+            SetBoardSlotState(curBlock.GetPointList());
+        }
+
+        public void SetBoardSlotState(List<BlockPos> posList)
+        {
+            for (int i = 0; i < posList.Count; ++i)
+            {
+                slotStateArray[posList[i].y, posList[i].x] = true;
+            }
+        }
+
+        public void UpdateBoard()
+        {
+
+            mChessBoardRender.Rendering(this);
         }
     }
 }

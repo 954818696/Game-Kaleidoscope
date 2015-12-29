@@ -1,15 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlockZ : MonoBehaviour {
+namespace GameLogic
+{
+    public class BlockZ : BlockBase
+    {
+        public BlockZ(int x, int y)
+        {
+ 
+        }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        public override void GenerateBlock(int x, int y)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void RotBlock(EBlockRot rotType)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void RotBlock()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
 }

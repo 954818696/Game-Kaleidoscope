@@ -14,11 +14,12 @@ namespace InputCustom
 
     public enum ESlideDirection
     {
-        E_None  = 0,  // == click/touch
+        E_None  = 0, 
         E_Left  = 1,
         E_Right = 2,
         E_Up    = 3,
         E_Down  = 4,
+        E_Click  = 5,
     }
 
     public class InputController : Singleton<InputController>
@@ -52,6 +53,7 @@ namespace InputCustom
 
         public void Update()
         {
+            mDirection = ESlideDirection.E_None;
             for (int i = 0; i < mDevice.Count; ++i)
             {
                 mDevice[i].Update();
@@ -92,7 +94,7 @@ namespace InputCustom
                 hdirection = ESlideDirection.E_Left;
             }
 
-            ESlideDirection finalDirection = ESlideDirection.E_None;
+            ESlideDirection finalDirection = ESlideDirection.E_Click;
             if (slope > GameConfig.Instance.SlopeThreshold)
             {
                 finalDirection = vdirection;

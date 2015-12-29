@@ -6,10 +6,12 @@ namespace GameLogic
     public class State
     {
         public string mStateName = "null";
+        public GameMode mGameMode;
         
         public virtual void Enter(GameMode gameMode)
         {
             LogDebug.Log("Enter State :" + mStateName.ToString());
+            mGameMode = gameMode;
         }
         
         public virtual void Execute()

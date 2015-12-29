@@ -15,6 +15,7 @@ public class GameConfig : MonoSingleton<GameConfig>
     public Transform mBlockPrefab;
     public Transform mLeftBottomPos;
 
+    public float GameSpeed = 1;
 
     // 滑动阈值
     public float SlideThreshold = 1f;

@@ -23,6 +23,9 @@ namespace GameLogic
         private State mPrevState = null;
         
         private GameMode mGameMode = null;
+
+        private float Speed;
+        private float DeltaTime;
             
         public StateMachine()
         {
@@ -32,6 +35,8 @@ namespace GameLogic
         public void Awake()
         {
             mGameMode = new GameModeClassic();
+            Speed = GameConfig.Instance.GameSpeed;
+            DeltaTime = Time.realtimeSinceStartup;
         }
 
         public void Reset()
@@ -94,10 +99,16 @@ namespace GameLogic
             
         }
 
-        static Vector3 pos1, pos2;
+        
         // Update is called once per frame
         void Update ()
         {
+            if (Time.realtimeSinceStartup - DeltaTime < Speed)
+            {
+                return;
+            }
+            DeltaTime = Time.realtimeSinceStartup;
+
             InputController.Instance.Update();
 
             if (mCurrentState != null)

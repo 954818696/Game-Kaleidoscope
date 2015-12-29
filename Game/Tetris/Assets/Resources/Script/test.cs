@@ -27,7 +27,9 @@ public class test : MonoBehaviour {
         {
             for (int x = 0; x < 10; ++x)
             {
-                Instantiate(mBlock, new Vector3(mLeftBottomPos.localPosition.x + x * blockWidth, mLeftBottomPos.localPosition.y + y * blockHeight, 0), Quaternion.identity);
+                GameObject a = Resources.Load("Prefab/Block") as GameObject;
+                //a.transform.localPosition = new Vector3(mLeftBottomPos.localPosition.x + x * blockWidth, mLeftBottomPos.localPosition.y + y * blockHeight, 0);
+                Instantiate(a, new Vector3(mLeftBottomPos.localPosition.x + x * blockWidth, mLeftBottomPos.localPosition.y + y * blockHeight, 0), Quaternion.identity);
             }
         }
     }

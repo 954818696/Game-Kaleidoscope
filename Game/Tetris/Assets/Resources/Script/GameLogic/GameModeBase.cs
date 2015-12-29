@@ -18,6 +18,8 @@ namespace GameLogic
 
         public ChessBoard mChessBoard = new ChessBoard();
 
+
+        
     }
 
 
