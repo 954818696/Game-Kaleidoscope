@@ -31,6 +31,8 @@ namespace GameLogic
                     slotStateArray[y, x] = false;
                 }
             }
+
+            mChessBoardRender = ChessBoardRender.Instance;
         }
         
         

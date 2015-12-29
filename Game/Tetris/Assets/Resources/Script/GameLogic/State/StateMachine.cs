@@ -39,6 +39,11 @@ namespace GameLogic
             DeltaTime = Time.realtimeSinceStartup;
         }
 
+        public void Start()
+        {
+            SetCurrentState(new StateGenerate());
+        }
+
         public void Reset()
         {
             mCurrentState = null;
@@ -50,6 +55,7 @@ namespace GameLogic
         public void SetCurrentState(State tState)
         {
             mCurrentState = tState;
+            mCurrentState.Enter(mGameMode);
         }
         
         public void SetPrevState(State tState)
@@ -93,13 +99,6 @@ namespace GameLogic
             return mCurrentState.mStateName == stateName;
         }
         
-        // Use this for initialization
-        void Start ()
-        {
-            
-        }
-
-        
         // Update is called once per frame
         void Update ()
         {
@@ -115,6 +114,7 @@ namespace GameLogic
             {
                 mCurrentState.Execute();
             }
+
 
             // Render. unity ，Unreal无需此次调用
             // 自己实现的Render需在此将游戏逻辑转化为图形输出。

@@ -7,8 +7,9 @@ namespace GameLogic
     {
         public static BlockBase GenerateBlock(int x, int y)
         {
-            EBlockType blockType = (EBlockType)Random.Range((int)EBlockType.E_Line, (int)EBlockType.E_Triangle);
+           // EBlockType blockType = (EBlockType)Random.Range((int)EBlockType.E_Line, (int)EBlockType.E_Triangle);
             EBlockRot   rotType = (EBlockRot)Random.Range(1, 4);
+            EBlockType blockType = EBlockType.E_Triangle;
            
             switch (blockType)
             {
