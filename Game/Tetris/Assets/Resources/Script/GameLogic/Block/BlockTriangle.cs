@@ -9,7 +9,7 @@ namespace GameLogic
 
         private int[,] blockMapPos;
 
-        public BlockTriangle(int x, int y, EBlockRot rotType = EBlockRot.E_Up)
+        public BlockTriangle(int x, int y, EBlockRot rotType)
         {
             blockType = EBlockType.E_Triangle;
             blockMapPos = new int[4, 2] { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };

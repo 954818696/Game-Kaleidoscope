@@ -102,13 +102,15 @@ namespace GameLogic
         // Update is called once per frame
         void Update ()
         {
+            InputController.Instance.Update();
+
             if (Time.realtimeSinceStartup - DeltaTime < Speed)
             {
                 return;
             }
             DeltaTime = Time.realtimeSinceStartup;
 
-            InputController.Instance.Update();
+           
 
             if (mCurrentState != null)
             {
@@ -118,6 +120,11 @@ namespace GameLogic
 
             // Render. unity ，Unreal无需此次调用
             // 自己实现的Render需在此将游戏逻辑转化为图形输出。
+        }
+
+        void FixedUpdate()
+        {
+            
         }
     }
 }

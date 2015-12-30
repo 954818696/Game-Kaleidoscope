@@ -25,6 +25,8 @@ namespace GameLogic
             mGameMode.mChessBoard.SetCurFallBlock(newBlock);
 
             mGameMode.mChessBoard.UpdateBoard();
+
+            StateMachine.Instance.ChangeState(new StateFall());
         }
         
         public override void Exit()

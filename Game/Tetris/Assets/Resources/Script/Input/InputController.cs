@@ -53,7 +53,6 @@ namespace InputCustom
 
         public void Update()
         {
-            mDirection = ESlideDirection.E_None;
             for (int i = 0; i < mDevice.Count; ++i)
             {
                 mDevice[i].Update();
@@ -66,6 +65,11 @@ namespace InputCustom
         public ESlideDirection GetDirection()
         {
             return mDirection;
+        }
+
+        public void Reset()
+        {
+            mDirection = ESlideDirection.E_None;
         }
 
         public void GetSlideDirection(Vector2 startPoint, Vector2 endPoint)
@@ -94,7 +98,7 @@ namespace InputCustom
                 hdirection = ESlideDirection.E_Left;
             }
 
-            ESlideDirection finalDirection = ESlideDirection.E_Click;
+            ESlideDirection finalDirection;
             if (slope > GameConfig.Instance.SlopeThreshold)
             {
                 finalDirection = vdirection;
@@ -104,6 +108,10 @@ namespace InputCustom
                 finalDirection = hdirection;
             }
 
+            if (finalDirection == ESlideDirection.E_None)
+            {
+                finalDirection = ESlideDirection.E_Click;
+            }
             LogDebug.Log(finalDirection.ToString());
 
             mDirection = finalDirection;
