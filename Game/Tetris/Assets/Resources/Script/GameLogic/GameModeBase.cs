@@ -18,7 +18,7 @@ namespace GameLogic
 
         public ChessBoard mChessBoard = new ChessBoard();
 
-
+        public abstract bool IsOver();
         
     }
 

@@ -16,17 +16,22 @@ namespace GameLogic
         }
 
 
-
         public override void Execute()
         {
             base.Execute();
 
-            BlockBase newBlock = BlockFactory.GenerateBlock(4, 19);
-            mGameMode.mChessBoard.SetCurFallBlock(newBlock);
+            if (mGameMode.IsOver())
+            {
+                StateMachine.Instance.ChangeState(new StateOver());
+            }
+            else
+            {
+                BlockBase newBlock = BlockFactory.GenerateBlock(4, 10);
+                mGameMode.mChessBoard.SetCurFallBlock(newBlock);
+                mGameMode.mChessBoard.UpdateBoard();
+                StateMachine.Instance.ChangeState(new StateFall());
+            }
 
-            mGameMode.mChessBoard.UpdateBoard();
-
-            StateMachine.Instance.ChangeState(new StateFall());
         }
         
         public override void Exit()

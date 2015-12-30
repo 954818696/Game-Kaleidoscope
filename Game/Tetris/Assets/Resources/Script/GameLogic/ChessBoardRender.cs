@@ -59,54 +59,62 @@ namespace Rendering
             return pos;
         }
 
-        public void Rendering(ChessBoard boardData)
+        public void Rendering(List<BlockPos> fallingBlock, List<BlockPos> stableBlock)
         {
-            int width = GameConfig.Instance.Width;
-            int height = GameConfig.Instance.Height;
-
-
-            for (int y = 0; y < height; ++y)
+            for (int i = 0; i < fallingBlock.Count; ++i)
             {
-                for (int x = 0; x < width; ++x)
+                Vector3 pos = GetSlotPos(fallingBlock[i].x, fallingBlock[i].y);
+                mFallBlocks[i].transform.localPosition = new Vector3(pos.x, pos.y, 0);
+            }
+
+            for (int i = 0; i < stableBlock.Count; ++i)
+            {
+                int dictKey = CalKey(stableBlock[i].x, stableBlock[i].y);
+                Vector3 pos = GetSlotPos(stableBlock[i].x, stableBlock[i].y);
+                if (mSlotDict[dictKey] == null)
                 {
-                    int dictKey = CalKey(x, y);
-                    if (boardData.slotStateArray[y, x])
-                    {
-                        if (mSlotDict[dictKey] == null)
-                        {
-                            Vector3 pos = GetSlotPos(x, y);
-                            GameObject mInstActor;
-                            mInstActor = Instantiate(mBlockActor, new Vector3(pos.x, pos.y, 0), Quaternion.identity) as GameObject;
-                            mSlotDict[dictKey] = mInstActor;
-                        }
-                        else if (mSlotDict[dictKey].activeSelf == false)
-                        {
-                            mSlotDict[dictKey].SetActive(true);
-                        }
-                    }
-                    else
-                    {
-                        if (mSlotDict[dictKey] != null)
-                        {
-                            mSlotDict[dictKey].SetActive(false);
-                        }
-                    }
+                    GameObject InstActor = Instantiate(mBlockActor, pos, Quaternion.identity) as GameObject;
+                    mSlotDict[dictKey] = InstActor;
                 }
             }
         }
 
-        public void Rendering(List<BlockPos> fallingBlock)
+        public void RenderingForReduce(List<int> lines)
         {
-            for (int i = 0; i < mFallBlocksNum; ++i)
+            for (int i = 0; i < mFallBlocks.Count; ++i)
             {
-                Vector3 pos = GetSlotPos(fallingBlock[i].x, fallingBlock[i].y);
-                mFallBlocks[i].transform.localPosition = new Vector3(pos.x, pos.y, 0);
+                mFallBlocks[i].transform.localPosition = new Vector3(-100f, -100f, 0);
+            }
+
+            for (int i = 0; i < lines.Count; ++i)
+            {
+                    int y = lines[i];
+                    for (int x = 0; x < GameConfig.Instance.Width; ++x)
+                    {
+                        int dictKey = CalKey(x, y);
+                       
+                        GameObject tmp =  mSlotDict[dictKey];
+                        if (tmp != null)
+                        {
+                            tmp.SetActive(false);
+                            Destroy(tmp);
+                            mSlotDict[dictKey] = null;
+                        }
+
+                        int dictKeyCur = CalKey(x, y + 1);
+                        if (mSlotDict[dictKeyCur] != null)
+                        {
+                            mSlotDict[dictKeyCur].transform.localPosition = GetSlotPos(x, y);
+                            mSlotDict[dictKey] = mSlotDict[dictKeyCur];
+                            mSlotDict[dictKeyCur] = null;
+                        }
+                    }
             }
         }
 
         private int CalKey(int x, int y)
         {
-            return x * 100 + y;
+            return (x + 1 ) * 100 + y;
         }
     }
 }

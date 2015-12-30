@@ -36,7 +36,7 @@ namespace GameLogic
 
             if (fallRlt)
             {
-                StateMachine.Instance.ChangeState(new StateGenerate());
+                StateMachine.Instance.ChangeState(new StateLand());
             }
         }
 

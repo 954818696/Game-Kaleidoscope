@@ -17,7 +17,8 @@ namespace GameLogic
     {
         public bool[,]         slotStateArray;
         private BlockBase curBlock;
-        private List<BlockPos> stableBlock;
+        private List<BlockPos> stableBlockList = new List<BlockPos>();
+        private List<int> reduceLines = new List<int>();
         private ChessBoardRender mChessBoardRender;
         
         public ChessBoard()
@@ -72,8 +73,7 @@ namespace GameLogic
 
         public void UpdateBoard()
         {
-
-            mChessBoardRender.Rendering(curBlock.GetPointList());
+            mChessBoardRender.Rendering(curBlock.GetPointList(), stableBlockList);
         }
 
         public void RotateBlock()
@@ -89,33 +89,138 @@ namespace GameLogic
         {
             List<BlockPos> posList = curBlock.GetPointList();
             SetBoardSlotState(posList, false);
+            int offset = direction == ESlideDirection.E_Left ? -1 : 1;
             for (int i = 0; i < posList.Count; ++i)
             {
-                posList[i].x = direction == ESlideDirection.E_Left ? posList[i].x - 1 : posList[i].x + 1;
+                posList[i].x += offset;
             }
+            curBlock.GetAncholBlockPos().x += offset; 
             SetBoardSlotState(posList, true);
         }
 
         public bool FallBlock()
         {
             List<BlockPos> posList = curBlock.GetPointList();
-            SetBoardSlotState(posList, false);
             bool rlt = false ;
-            for (int i = 0; i < posList.Count; ++i)
+            stableBlockList.Clear();
+            SetBoardSlotState(posList, false);
+            if (CanVerticalFall(posList))
             {
-                --posList[i].y;
-                if (posList[i].y < 0)
+                for (int i = 0; i < posList.Count; ++i)
                 {
-                    posList[i].y = 0;
-                    rlt = true;
-                    break;
+                    --posList[i].y;
                 }
-            }
 
-            SetBoardSlotState(posList, true);
+                curBlock.GetAncholBlockPos().y -= 1;
+            }
+            else
+            {
+                rlt = true;
+                stableBlockList.AddRange(posList);
+            }
+			SetBoardSlotState(posList, true);
 
             return rlt;
         }
+
+        public bool ReduceLine()
+        {
+            reduceLines.Clear();
+            for (int y = 0; y < GameConfig.Instance.Height; ++y)
+            {
+                bool bCanReduce = true;
+                for (int x = 0; x < GameConfig.Instance.Width; ++x)
+                {
+                    if (slotStateArray[y, x] == false)
+                    {
+                        bCanReduce = false;
+                        break;
+                    }
+                }
+
+                if (bCanReduce)
+                {
+                    reduceLines.Add(y);
+                }
+            }
+
+            if (reduceLines.Count > 0)
+            {
+                for (int i = 0; i < reduceLines.Count; ++i)
+                {
+                    for (int y = reduceLines[i]; y < GameConfig.Instance.Height - 1; ++y)
+                    {
+                        for (int x = 0; x < GameConfig.Instance.Width; ++x)
+                        {
+                            slotStateArray[y, x] = slotStateArray[y + 1, x];
+                        }
+                        
+                    }
+                }
+
+                stableBlockList.Clear();
+                for (int y = 0; y < GameConfig.Instance.Height; ++y)
+                {
+                    for (int x = 0; x < GameConfig.Instance.Width; ++x)
+                    {
+                        if (slotStateArray[y, x])
+                        {
+                            stableBlockList.Add(new BlockPos(x, y));
+                        }
+                    }
+
+                }
+                return true;
+            }
+
+            return false;
+        }
+
+        public void UpdateReduce()
+        {
+            mChessBoardRender.RenderingForReduce(reduceLines);
+        }
+
+        public List<int> GetReduceLine()
+        {
+            return reduceLines;
+        }
+
+        private bool CanVerticalFall(List<BlockPos> posList)
+        {
+            for (int k = 0; k < posList.Count; ++k)
+            {
+                if (posList[k].y == 0)
+                {
+                    return false;
+                }
+
+				if (slotStateArray[posList[k].y - 1, posList[k].x])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public int GetHeight()
+        {
+            int maxHeight = 0;
+            for (int y = 0; y <GameConfig.Instance.Height; ++y)
+            {
+                for (int x = 0; x < GameConfig.Instance.Width; ++x)
+                {
+                    if (slotStateArray[y, x] && y > maxHeight)
+                    {
+                        maxHeight = y;
+                    }
+                }
+            }
+
+            return maxHeight;
+        }
+
     }
 }
 

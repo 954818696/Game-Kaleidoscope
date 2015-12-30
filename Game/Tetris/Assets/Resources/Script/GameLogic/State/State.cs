@@ -10,18 +10,18 @@ namespace GameLogic
         
         public virtual void Enter(GameMode gameMode)
         {
-            LogDebug.Log("Enter State :" + mStateName.ToString());
+           // LogDebug.Log("Enter State :" + mStateName.ToString());
             mGameMode = gameMode;
         }
         
         public virtual void Execute()
         {
-            LogDebug.Log("Excute State :" + mStateName.ToString());
+           // LogDebug.Log("Excute State :" + mStateName.ToString());
         }
         
         public virtual void Exit()
         {
-            LogDebug.Log("Exit State :" + mStateName.ToString());
+          //  LogDebug.Log("Exit State :" + mStateName.ToString());
         }
     }
 }

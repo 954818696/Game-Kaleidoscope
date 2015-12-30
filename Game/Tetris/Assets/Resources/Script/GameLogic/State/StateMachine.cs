@@ -126,6 +126,11 @@ namespace GameLogic
         {
             
         }
+
+        public void Stop()
+        {
+            mCurrentState = null;
+        }
     }
 }
 

@@ -11,6 +11,11 @@ namespace GameLogic
             mGameModeType = EGameMode.E_Classic;
         }
 
+
+        public override bool IsOver()
+        {
+            return mChessBoard.GetHeight() >= 10;
+        }
     }
 
 }

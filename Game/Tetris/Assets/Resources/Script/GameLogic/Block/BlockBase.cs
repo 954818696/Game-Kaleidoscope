@@ -48,6 +48,11 @@ namespace GameLogic
             return generateList;
         }
 
+        public BlockPos GetAncholBlockPos()
+        {
+            return ancholBlock;
+        }
+
         public abstract void RotBlock(EBlockRot rotType);
         public abstract void RotBlock();
 
